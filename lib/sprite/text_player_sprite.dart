@@ -1,8 +1,8 @@
-
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/painting.dart';
+import 'package:text_shooting/collision/collision_actor.dart';
 import 'package:text_shooting/sprite/base_sprite.dart';
 
 class TextPlayerSprite extends BaseSprite {
@@ -24,12 +24,43 @@ class TextPlayerSprite extends BaseSprite {
 
   @override
   void draw(Canvas canvas) {
+
     textPainter.layout();
-    textPainter.paint(canvas, new Offset(100, 100));
+    textPainter.paint(canvas, position);
+
+    _settingSpriteSize();
+
+//    debug(canvas);
   }
 
   @override
-  bool isCollision(Rectangle anotherObject) {
-    return false;
+  void collisionObject(CollisionActor object) {
+    // TODO: implement collisionObject
   }
+
+  @override
+  bool defineCollision(Rectangle<num> aimRect) {
+    return aimRect.intersects(getCollisionRange());
+  }
+
+  void _settingSpriteSize() {
+    if(textPainter != null && width == 0 && height == 0) {
+      width = textPainter.width;
+      height = textPainter.height;
+    }
+  }
+
+  void debug(Canvas canvas) {
+    //draw collision range
+    Rect rect = new Rect.fromLTWH(posX, posY, width, height);
+
+    Paint rectPaint = Paint();
+    rectPaint.style = PaintingStyle.stroke;
+    rectPaint.color = Color.fromARGB(255, 255, 0, 0);
+
+    canvas.drawRect(rect, rectPaint);
+  }
+
+
+
 }

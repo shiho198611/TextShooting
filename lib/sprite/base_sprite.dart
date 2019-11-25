@@ -1,22 +1,39 @@
 import 'dart:ui';
 import 'dart:math';
 
+import 'package:text_shooting/collision/collision_actor.dart';
 import 'package:text_shooting/sprite/sprite_type.dart';
 
-abstract class BaseSprite {
+abstract class BaseSprite implements CollisionActor {
 
   String tag;
   SpriteType spriteType = SpriteType.NONE;
 
   Rectangle posRect;
-  Rectangle collRect;
+
+  double posX = 0;
+  double posY = 0;
+
+  double width = 0;
+  double height = 0;
+
+  Offset position;
 
   BaseSprite() {
-    collRect = Rectangle(0, 0, 0, 0);
-    posRect = Rectangle(0, 0, 0, 0);
+    position = Offset(posX, posY);
+  }
+
+  void setPosition(double x, double y) {
+    position = position.translate(x - posX, y - posY);
+    posX = x;
+    posY = y;
+  }
+
+  @override
+  Rectangle getCollisionRange() {
+    return Rectangle(posX, posY, posX+width, posY+height);
   }
 
   void draw(Canvas canvas);
-  bool isCollision(Rectangle anotherObject);
 
 }
