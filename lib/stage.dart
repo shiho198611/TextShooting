@@ -13,7 +13,9 @@ class Stage extends RenderBox {
   StageLayer playerLayer;
   StageLayer enemyLayer;
 
+
   Stage(BuildContext context) {}
+
 
   void _scheduleTick() {
     _frameCallbackId = SchedulerBinding.instance.scheduleFrameCallback(_tick);
@@ -34,6 +36,8 @@ class Stage extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
 
+    playerLayer.drawSprites(context.canvas);
+
   }
 
   @override
@@ -48,7 +52,13 @@ class Stage extends RenderBox {
     enemyLayer = StageLayer();
 
     TextPlayerSprite player = TextPlayerSprite("測");
-    
+    player.setPosition(50, 50);
+
+    TextPlayerSprite player2 = TextPlayerSprite("試");
+    player2.setPosition(100, 100);
+
+    playerLayer.addSprite(player);
+    playerLayer.addSprite(player2);
 
   }
 
