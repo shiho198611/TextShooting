@@ -32,24 +32,5 @@ class StageLayer {
       sprites[i].draw(canvas);
     }
   }
-  
-  List<BaseSprite> collisionInteraction(List<BaseSprite> interactionSprite) {
-
-    List<BaseSprite> result = new List();
-
-    for(int actionIndex = 0; actionIndex < interactionSprite.length; actionIndex++) {
-
-      for(int spIndex = 0; spIndex < sprites.length; spIndex++) {
-        if(interactionSprite[actionIndex].isCollision(sprites[spIndex].collRect)) {
-          result.add(sprites[spIndex]);
-        }
-      }
-
-    }
-    return result;
-  }
-
-//  void drawSprites(Canvas canvas);
-//  List<BaseSprite> collisionInteraction(List<BaseSprite> interactionSprite);
 
 }
