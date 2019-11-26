@@ -4,22 +4,22 @@ import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:text_shooting/collision/collision_actor.dart';
 import 'package:text_shooting/sprite/base_sprite.dart';
-import 'package:text_shooting/sprite/sprite_type.dart';
 
-class TextPlayerSprite extends BaseSprite {
+class TextSprite extends BaseSprite {
 
-  String playerTxt;
+  String drawTxt;
   TextSpan textSpan;
   TextStyle textStyle;
   TextPainter textPainter;
+  int life;
 
-  TextPlayerSprite(String playerTxt) {
+  bool firstLayout = true;
 
-    this.spriteType = SpriteType.PLAYER;
+  TextSprite(String playerTxt) {
 
-    this.playerTxt = playerTxt;
+    this.drawTxt = playerTxt;
 
-    textStyle = TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 0, 0));
+    textStyle = TextStyle(fontSize: 24, color: Color.fromARGB(255, 255, 0, 0));
     textSpan = TextSpan(text: playerTxt, style: textStyle);
     
     textPainter = TextPainter(text: textSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
@@ -28,34 +28,29 @@ class TextPlayerSprite extends BaseSprite {
   @override
   void draw(Canvas canvas) {
 
-    textPainter.layout();
+    if(firstLayout) {
+      textPainter.layout();
+      _settingSpriteSize();
+
+      firstLayout = false;
+    }
+
+    canvas.save();
     textPainter.paint(canvas, position);
-
-    _settingSpriteSize();
-
-//    debug(canvas);
+    canvas.restore();
   }
 
   @override
-  void collisionObject(CollisionActor object) {
-    if(!(object is BaseSprite)) {
-      return;
-    }
-
-    var collSprite = object as BaseSprite;
-    switch(collSprite.spriteType) {
-      case SpriteType.ENEMY:
-        print("");
-        break;
-      default:
-        
-
-    }
-  }
+  void collisionObject(CollisionActor object) {}
 
   @override
   bool defineCollision(Rectangle<num> aimRect) {
-    return aimRect.intersects(getCollisionRange());
+    if(isCollision) {
+      return aimRect.intersects(getCollisionRange());
+    }
+    else {
+      return false;
+    }
   }
 
   void _settingSpriteSize() {
