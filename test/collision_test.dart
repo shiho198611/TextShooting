@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:text_shooting/sprite/text_player_sprite.dart';
+import 'package:text_shooting/sprite/text_sprite.dart';
 
 void main() {
 
   test("Right upper collision expected true", () {
 
-    var fakeColl1 = TextPlayerSprite("a");
-    var fakeColl2 = TextPlayerSprite("b");
+    var fakeColl1 = TextSprite("a");
+    var fakeColl2 = TextSprite("b");
 
     fakeColl1.setPosition(0, 0);
     fakeColl1.width = 100;
@@ -23,8 +23,8 @@ void main() {
 
   test("Left under collision expected true", () {
 
-    var fakeColl1 = TextPlayerSprite("a");
-    var fakeColl2 = TextPlayerSprite("b");
+    var fakeColl1 = TextSprite("a");
+    var fakeColl2 = TextSprite("b");
 
     fakeColl1.setPosition(0, 0);
     fakeColl1.width = 100;
@@ -40,8 +40,8 @@ void main() {
   });
 
   test("out range collision expected false", () {
-    var fakeColl1 = TextPlayerSprite("a");
-    var fakeColl2 = TextPlayerSprite("b");
+    var fakeColl1 = TextSprite("a");
+    var fakeColl2 = TextSprite("b");
 
     fakeColl1.setPosition(0, 0);
     fakeColl1.width = 100;
@@ -57,8 +57,8 @@ void main() {
   });
 
   test("just fit collision expected true", () {
-    var fakeColl1 = TextPlayerSprite("a");
-    var fakeColl2 = TextPlayerSprite("b");
+    var fakeColl1 = TextSprite("a");
+    var fakeColl2 = TextSprite("b");
 
     fakeColl1.setPosition(0, 0);
     fakeColl1.width = 100;
