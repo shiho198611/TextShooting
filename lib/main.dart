@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:text_shooting/stage.dart';
+import 'package:text_shooting/stage/stage.dart';
 
 void main() => runApp(MyApp());
 
