@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:text_shooting/collision/collision_actor.dart';
 import 'package:text_shooting/sprite/base_sprite.dart';
+import 'package:text_shooting/sprite/sprite_type.dart';
 
 class TextPlayerSprite extends BaseSprite {
 
@@ -13,6 +14,8 @@ class TextPlayerSprite extends BaseSprite {
   TextPainter textPainter;
 
   TextPlayerSprite(String playerTxt) {
+
+    this.spriteType = SpriteType.PLAYER;
 
     this.playerTxt = playerTxt;
 
@@ -35,7 +38,19 @@ class TextPlayerSprite extends BaseSprite {
 
   @override
   void collisionObject(CollisionActor object) {
-    // TODO: implement collisionObject
+    if(!(object is BaseSprite)) {
+      return;
+    }
+
+    var collSprite = object as BaseSprite;
+    switch(collSprite.spriteType) {
+      case SpriteType.ENEMY:
+        print("");
+        break;
+      default:
+        
+
+    }
   }
 
   @override
@@ -60,7 +75,5 @@ class TextPlayerSprite extends BaseSprite {
 
     canvas.drawRect(rect, rectPaint);
   }
-
-
 
 }

@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:text_shooting/layer/stage_layer.dart';
-import 'package:text_shooting/sprite/text_player_sprite.dart';
+import 'package:text_shooting/sprite/text_sprite.dart';
 
 class Stage extends RenderBox {
 
@@ -51,10 +51,10 @@ class Stage extends RenderBox {
     playerLayer = StageLayer();
     enemyLayer = StageLayer();
 
-    TextPlayerSprite player = TextPlayerSprite("測");
+    TextSprite player = TextSprite("測");
     player.setPosition(50, 50);
 
-    TextPlayerSprite player2 = TextPlayerSprite("試");
+    TextSprite player2 = TextSprite("試");
     player2.setPosition(100, 100);
 
     playerLayer.addSprite(player);
