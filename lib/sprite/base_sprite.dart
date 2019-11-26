@@ -18,13 +18,16 @@ abstract class BaseSprite implements CollisionActor {
   double height = 0;
 
   Offset position;
+  bool isCollision;
 
   BaseSprite() {
     position = Offset(posX, posY);
+    isCollision = true;
   }
 
   void setPosition(double x, double y) {
     position = position.translate(x - posX, y - posY);
+
     posX = x;
     posY = y;
   }
