@@ -4,12 +4,12 @@ import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:text_shooting/collision/collision_actor.dart';
 import 'package:text_shooting/sprite/base_sprite.dart';
+import 'package:text_shooting/sprite/sprite_define.dart';
 
-class TextSprite extends BaseSprite {
+abstract class TextSprite extends BaseSprite implements SpriteDefine {
 
   String drawTxt;
   TextSpan textSpan;
-  TextStyle textStyle;
   TextPainter textPainter;
   int life;
 
@@ -19,21 +19,19 @@ class TextSprite extends BaseSprite {
 
     this.drawTxt = playerTxt;
 
-    textStyle = TextStyle(fontSize: 24, color: Color.fromARGB(255, 255, 0, 0));
-    textSpan = TextSpan(text: playerTxt, style: textStyle);
+    textSpan = TextSpan(text: playerTxt, style: getDefineTextStyle());
+    spriteType = getDefineSpriteType();
     
     textPainter = TextPainter(text: textSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+    textPainter.layout();
+
+    width = textPainter.size.width;
+    height = textPainter.size.height;
+
   }
 
   @override
   void draw(Canvas canvas) {
-
-    if(firstLayout) {
-      textPainter.layout();
-      _settingSpriteSize();
-
-      firstLayout = false;
-    }
 
     canvas.save();
     textPainter.paint(canvas, position);
@@ -53,12 +51,7 @@ class TextSprite extends BaseSprite {
     }
   }
 
-  void _settingSpriteSize() {
-    if(textPainter != null && width == 0 && height == 0) {
-      width = textPainter.width;
-      height = textPainter.height;
-    }
-  }
+  void act(int timeLine) {}
 
   void debug(Canvas canvas) {
     //draw collision range

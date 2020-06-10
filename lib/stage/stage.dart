@@ -15,10 +15,6 @@ class Stage extends RenderBox {
 
   void _scheduleTick() {
     _frameCallbackId = SchedulerBinding.instance.scheduleFrameCallback(_tick);
-
-//    if(director != null) {
-//      director.testAct();
-//    }
   }
 
   void _tick(Duration timestamp) {
@@ -38,7 +34,7 @@ class Stage extends RenderBox {
 
     if(director != null) {
 
-      director.testAct();
+      director.gameLogic();
 
       director.drawLayer(context.canvas);
     }
@@ -51,6 +47,15 @@ class Stage extends RenderBox {
 
     director = new Director(size.width, size.height);
     director.initSetting();
+  }
+
+  void handleTapDownCtrlEvent(double dx, double dy) {
+//    director.shootingPlayerBullet(dx, dy);
+    director.movingPlayerTapDown(dx, dy);
+  }
+
+  void handleTapUpCtrlEvent(double dx, double dy) {
+    director.movingPlayerTapUp(dx, dy);
   }
 
 }

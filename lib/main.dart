@@ -77,7 +77,28 @@ class StageWidgetState extends State<StageStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: mGameStage);
+//    return Scaffold(body: mGameStage);
+
+    return GestureDetector(
+      onTapDown: (TapDownDetails detail) {
+//        print("global position:");
+//        print(detail.globalPosition.dx);
+//        print(detail.globalPosition.dy);
+//
+//        print("local position:");
+//        print(detail.localPosition.dx);
+//        print(detail.localPosition.dy);
+
+        
+        mGameStage.stage.handleTapDownCtrlEvent(detail.localPosition.dx, detail.localPosition.dy);
+
+      },
+      onTapUp: (TapUpDetails detail) {
+        mGameStage.stage.handleTapUpCtrlEvent(detail.localPosition.dx, detail.localPosition.dy);
+      },
+      child: Scaffold(body: mGameStage),
+    );
+
   }
 }
 

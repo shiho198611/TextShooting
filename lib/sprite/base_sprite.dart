@@ -2,12 +2,14 @@ import 'dart:ui';
 import 'dart:math';
 
 import 'package:text_shooting/collision/collision_actor.dart';
-import 'package:text_shooting/sprite/sprite_type.dart';
+import 'package:text_shooting/sprite/sprite_const.dart';
 
 abstract class BaseSprite implements CollisionActor {
 
   String tag;
-  SpriteType spriteType = SpriteType.NONE;
+//  SpriteType spriteType = SpriteType.NONE;
+
+  int spriteType = SPRITE_NONE;
 
   Rectangle posRect;
 
@@ -34,9 +36,10 @@ abstract class BaseSprite implements CollisionActor {
 
   @override
   Rectangle getCollisionRange() {
-    return Rectangle(posX, posY, posX+width, posY+height);
+    return Rectangle(posX, posY, width, height);
   }
 
   void draw(Canvas canvas);
+  void act(int timeLine);
 
 }
